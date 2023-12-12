@@ -30,7 +30,7 @@ document.querySelector('#app').innerHTML = `
 document.querySelector('#search-pokemon').addEventListener('click', () =>{
   let pokemon = document.querySelector('#poke-name').value
   console.log(pokemon)
-  pokemon = String(pokemon).toLowerCase()
+pokemon = String(pokemon).toLowerCase()
   getPokemonData(pokemon)
   cleanInput()
 })
