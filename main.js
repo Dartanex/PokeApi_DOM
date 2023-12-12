@@ -5,7 +5,11 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 const getPokemonData = (nombre) => {
   fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}`)
     .then((response) => response.json())
-    .then((data) => console.log(data))
+    .then((data) => {
+      console.log(data)
+      let abilities = data.abilities
+      document.querySelector('#image-changer').src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${data.id}.svg`
+    })
 
     .catch((error) => console.log(`API error: ${error}`))
 }
@@ -22,19 +26,16 @@ document.querySelector('#app').innerHTML = `
   <img src="" id="image-changer">
 </div>
 `
-const getPokemonId = (nombre) => {
-  fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}`)
-    .then((response) => response.json())
-    .then((data) => {
-      document.querySelector('#image-changer').src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${data.id}.svg`
-    })
-    .catch((error) => console.log(`API error: ${error}`))
-}
 
 document.querySelector('#search-pokemon').addEventListener('click', () =>{
   let pokemon = document.querySelector('#poke-name').value
   console.log(pokemon)
+  pokemon = String(pokemon).toLowerCase()
   getPokemonData(pokemon)
-  getPokemonId(pokemon)
-  
+  cleanInput()
 })
+
+//cleaning input
+const cleanInput = () => {
+  document.getElementById('poke-name').value = ''
+}
