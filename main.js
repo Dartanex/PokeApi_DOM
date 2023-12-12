@@ -73,7 +73,7 @@ pokemon = String(pokemon).toLowerCase()
   getPokemonIdAndName(pokemon)
   getPokemonType(pokemon)
   getPokemonPotential(pokemon)
-
+  cleanInput()
   
 })
 
