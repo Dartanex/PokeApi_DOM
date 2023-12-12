@@ -7,7 +7,13 @@ const getPokemonData = (nombre) => {
     .then((response) => response.json())
     .then((data) => console.log(data))
 
-    .catch((error) => console.log(`API error: ${error}`))
+    .catch((error) => {
+      
+      document.querySelector('#app').innerHTML = `
+      <div class="alert alert-danger" role="alert">
+        El pokemon ingresado no existe, recarga la página e intenta nuevamente con un nombre de pokemon válido
+      </div>`
+    })
 }
 
 let id = 2
@@ -26,7 +32,7 @@ document.querySelector('#app').innerHTML = `
   </ul>
 </div>
 `
-const getPokemonId = (nombre) => {
+const getPokemonIdAndName = (nombre) => {
   fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}`)
     .then((response) => response.json())
     .then((data) => {
@@ -63,7 +69,7 @@ document.querySelector('#search-pokemon').addEventListener('click', () =>{
   let pokemon = document.querySelector('#poke-name').value
   console.log(pokemon)
   getPokemonData(pokemon)
-  getPokemonId(pokemon)
+  getPokemonIdAndName(pokemon)
   getPokemonType(pokemon)
   getPokemonPotential(pokemon)
 
